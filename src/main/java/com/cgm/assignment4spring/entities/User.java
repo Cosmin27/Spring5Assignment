@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@Entity
 public class User {
 	private String username = "";
 	@JsonIgnore
