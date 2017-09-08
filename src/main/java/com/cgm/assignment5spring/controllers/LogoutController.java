@@ -1,4 +1,4 @@
-package com.cgm.assignment4spring.controllers;
+package com.cgm.assignment5spring.controllers;
 
 import java.util.Locale;
 
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cgm.assignment4spring.entities.User;
+import com.cgm.assignment5spring.domain.User;
 
 @Controller
 public class LogoutController {
@@ -19,9 +19,9 @@ public class LogoutController {
 		if ((Boolean) request.getSession().getAttribute("logged")) {
 			request.getSession().setAttribute("logged", false);
 			User user = (User) request.getSession().getAttribute("userAccount");
-			if(user != null) {
+			/*if(user != null) {
 				user.setLogged(false);
-			}
+			}*/
 			request.getSession().removeAttribute("userAccount");
 			// System.out.println("LOGGED OUT");
 			return new ModelAndView("redirect:/", model.asMap());

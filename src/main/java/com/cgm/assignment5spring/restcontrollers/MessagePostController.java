@@ -1,4 +1,4 @@
-package com.cgm.assignment4spring.restcontrollers;
+package com.cgm.assignment5spring.restcontrollers;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cgm.assignment4spring.builders.ArtefactBuilder;
-import com.cgm.assignment4spring.entities.Message;
-import com.cgm.assignment4spring.entities.User;
+import com.cgm.assignment5spring.domain.Message;
+import com.cgm.assignment5spring.domain.User;
 
 @RestController
 public class MessagePostController {
@@ -18,7 +17,7 @@ public class MessagePostController {
 		//System.out.println("TEST "+message.getMessageText());
 		User user = (User) request.getSession().getAttribute("userAccount");
 		message.setMessageAuthor(user);
-		ArtefactBuilder.getMessageQueue().addMessage(message);
+		//ArtefactBuilder.getMessageQueue().addMessage(message);
 		
 		return message;
 	}

@@ -1,4 +1,4 @@
-package com.cgm.assignment4spring.controllers;
+package com.cgm.assignment5spring.controllers;
 
 import java.util.Map;
 
@@ -13,19 +13,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cgm.assignment4spring.builders.ArtefactBuilder;
-import com.cgm.assignment4spring.entities.User;
+import com.cgm.assignment5spring.domain.User;
 
 @Controller
 public class FollowController {
 	@RequestMapping(value = "/followUser/{username}", method = RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView followUser(@PathVariable("username") String username, Map model, HttpServletRequest request) {
-		for(User user : ArtefactBuilder.userAccounts()) {
+		/*for(User user : ArtefactBuilder.userAccounts()) {
 			if(user.getUsername().equals(username)) {
 				user.addFriend((User) request.getSession().getAttribute("userAccount"));
 			}
-		}
+		}*/
 		//System.out.println("USER: " + username);
 		return new ModelAndView("redirect:/friends", model);
 		
@@ -34,11 +33,11 @@ public class FollowController {
 	@RequestMapping(value = "/unfollowUser/{username}", method = RequestMethod.GET)
 	@ResponseBody
 	public ModelAndView unfollowUser(@PathVariable("username") String username, Map model, HttpServletRequest request) {
-		for(User user : ArtefactBuilder.userAccounts()) {
+		/*for(User user : ArtefactBuilder.userAccounts()) {
 			if(user.getUsername().equals(username)) {
 				user.removeFriend((User) request.getSession().getAttribute("userAccount"));
 			}
-		}
+		}*/
 		//System.out.println("USER: " + username);
 		return new ModelAndView("redirect:/friends", model);
 		

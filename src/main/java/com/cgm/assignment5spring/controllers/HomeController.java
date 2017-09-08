@@ -1,4 +1,4 @@
-package com.cgm.assignment4spring.controllers;
+package com.cgm.assignment5spring.controllers;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -18,10 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.cgm.assignment4spring.builders.ArtefactBuilder;
-import com.cgm.assignment4spring.entities.Message;
-import com.cgm.assignment4spring.entities.ServiceResponse;
-import com.cgm.assignment4spring.entities.User;
+import com.cgm.assignment5spring.domain.Message;
+import com.cgm.assignment5spring.domain.User;
+import com.cgm.assignment5spring.dto.ServiceResponse;
 
 /**
  * Handles requests for the application home page.

@@ -1,4 +1,4 @@
-package com.cgm.assignment4spring.entities;
+package com.cgm.assignment5spring.dto;
 
 public class ServiceResponse {
 	private String message = "Operation successful!";

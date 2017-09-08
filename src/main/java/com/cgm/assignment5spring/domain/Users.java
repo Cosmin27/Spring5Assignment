@@ -1,4 +1,4 @@
-package com.cgm.assignment4spring.entities;
+package com.cgm.assignment5spring.domain;
 
 import java.util.ArrayList;
 

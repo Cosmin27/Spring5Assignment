@@ -1,4 +1,4 @@
-package com.cgm.assignment4spring.controllers;
+package com.cgm.assignment5spring.controllers;
 
 import java.util.Locale;
 
@@ -9,8 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.cgm.assignment4spring.builders.ArtefactBuilder;
 
 @Controller
 public class FriendsController {

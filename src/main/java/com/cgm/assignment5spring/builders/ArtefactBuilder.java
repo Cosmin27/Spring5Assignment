@@ -1,11 +1,11 @@
-package com.cgm.assignment4spring.builders;
+/*package com.cgm.assignment5spring.builders;
 
 import java.util.ArrayList;
 
-import com.cgm.assignment4spring.entities.Message;
-import com.cgm.assignment4spring.entities.MessageQueue;
-import com.cgm.assignment4spring.entities.User;
-import com.cgm.assignment4spring.entities.Users;
+import com.cgm.assignment5spring.domain.Message;
+import com.cgm.assignment5spring.domain.MessageQueue;
+import com.cgm.assignment5spring.domain.User;
+import com.cgm.assignment5spring.domain.Users;
 
 public class ArtefactBuilder {
 	private static Users users = new Users();
@@ -62,3 +62,4 @@ public class ArtefactBuilder {
 		return users;
 	}
 }
+*/

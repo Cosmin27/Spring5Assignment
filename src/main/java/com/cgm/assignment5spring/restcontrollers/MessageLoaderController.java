@@ -1,4 +1,4 @@
-package com.cgm.assignment4spring.restcontrollers;
+package com.cgm.assignment5spring.restcontrollers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cgm.assignment4spring.builders.ArtefactBuilder;
-import com.cgm.assignment4spring.entities.Message;
-import com.cgm.assignment4spring.entities.MessageQueue;
-import com.cgm.assignment4spring.entities.User;
+import com.cgm.assignment5spring.domain.Message;
+import com.cgm.assignment5spring.domain.MessageQueue;
+import com.cgm.assignment5spring.domain.User;
 
 @RestController
 public class MessageLoaderController {
@@ -20,12 +19,12 @@ public class MessageLoaderController {
 		//System.out.println("HERE!!!");
 		MessageQueue messageQueue = new MessageQueue();
 		
-		User currentUser = ArtefactBuilder.getUsers().getUserWithUsername(username);
+		/*User currentUser = ArtefactBuilder.getUsers().getUserWithUsername(username);
 		for(Message message : ArtefactBuilder.getMessageQueue().getMessages()) {
 			if(message.getMessageAuthor().getUsername().equals(username) || currentUser.getFriendsAsStrings().contains(message.getMessageAuthor().getUsername())) {
 				messageQueue.addMessage(message);
 			}
-		}
+		}*/
 		
 		return messageQueue;
 	}
