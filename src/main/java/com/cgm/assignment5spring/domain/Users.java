@@ -18,7 +18,7 @@ public class Users {
 	
 	public User getUserWithUsername(String username) {
 		for(User user : users) {
-			if(user.getUsername().equals(username)) {
+			if(user.getUser_name().equals(username)) {
 				return user;
 			}
 		}

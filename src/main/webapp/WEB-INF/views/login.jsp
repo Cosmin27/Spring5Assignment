@@ -49,16 +49,16 @@
 								<tr>
 									<td><label for="username" class="artist_form_label">Username:
 									</label></td>
-									<td><sf:input path="username" size="15" id="username"
-											class="vertical_middle" /> <sf:errors path="username"
+									<td><sf:input path="user_name" size="15" id="username"
+											class="vertical_middle" /> <sf:errors path="user_name"
 											cssClass="error" /></td>
 								</tr>
 								<tr>
 									<td><label for="password" class="artist_form_label">Password:
 									</label></td>
-									<td><sf:input path="password" size="15" id="password"
+									<td><sf:input path="user_password" size="15" id="password"
 											type="password" class="vertical_middle" /> <sf:errors
-											path="password" cssClass="error" /></td>
+											path="user_password" cssClass="error" /></td>
 								</tr>
 							</table>
 						</div>

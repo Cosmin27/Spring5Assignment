@@ -47,25 +47,41 @@ public class User implements Serializable {
 		
 	}
 
-	public User(String username, String password) {
-		this.user_name = username;
-		this.user_password = password;
+	public User(String user_name, String user_password) {
+		this.user_name = user_name;
+		this.user_password = user_password;
 	}
 
-	public String getUsername() {
+	public String getUser_email() {
+		return user_email;
+	}
+
+	public void setUser_email(String user_email) {
+		this.user_email = user_email;
+	}
+
+	public String getUser_name() {
 		return user_name;
 	}
 
-	public void setUsername(String username) {
-		this.user_name = username;
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
 	}
 
-	public String getPassword() {
+	public String getUser_password() {
 		return user_password;
 	}
 
-	public void setPassword(String password) {
-		this.user_password = password;
+	public void setUser_password(String user_password) {
+		this.user_password = user_password;
+	}
+
+	public List<User> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(List<User> friends) {
+		this.friends = friends;
 	}
 
 	public int getId() {
@@ -74,13 +90,5 @@ public class User implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getUserEmail() {
-		return user_email;
-	}
-
-	public void setUserEmail(String user_email) {
-		this.user_email = user_email;
 	}
 }

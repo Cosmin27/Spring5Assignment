@@ -33,9 +33,9 @@ public class DBUserDAO implements UserDataStore {
 	@Transactional
 	public void storeUser(User user) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
-		parameters.put("user_name", user.getUsername());
-		parameters.put("user_password", user.getPassword());
-		parameters.put("user_email", user.getUserEmail());
+		parameters.put("user_name", user.getUser_name());
+		parameters.put("user_password", user.getUser_password());
+		parameters.put("user_email", user.getUser_email());
 		
 		try {
 			insertUser.execute(parameters);

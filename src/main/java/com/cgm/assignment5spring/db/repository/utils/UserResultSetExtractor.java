@@ -12,9 +12,9 @@ public class UserResultSetExtractor implements ResultSetExtractor<User> {
 	public User extractData(ResultSet rs) throws SQLException {
 		User user = new User();
 		user.setId(rs.getInt("id"));
-		user.setUsername(rs.getString("user_name"));
-		user.setPassword(rs.getString("user_password"));
-		user.setUserEmail(rs.getString("user_email"));
+		user.setUser_name(rs.getString("user_name"));
+		user.setUser_password(rs.getString("user_password"));
+		user.setUser_email(rs.getString("user_email"));
 		
 		return user;
 	}
