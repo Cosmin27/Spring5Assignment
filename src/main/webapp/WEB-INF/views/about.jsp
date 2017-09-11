@@ -56,7 +56,7 @@
 		var logged = ${sessionScope.logged};
 		if(logged == true){
 			var usernameString = "${sessionScope.usernameString}";
-			var userID = ${sessionScope.userID};
+			var userID = "${sessionScope.userID}";
 		}
 		else {
 			var usernameString = "";

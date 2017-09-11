@@ -88,7 +88,18 @@ public class User implements Serializable {
 	}
 	
 	public void addFriend(User friend) {
-		
+		friends.add(friend);
+	}
+	
+	public void removeFriend(User friend) {
+		friends.remove(friend);
+	}
+	
+	public boolean hasFriend(User user) {
+		if(friends.contains(user)) {
+			return true;
+		}
+		return false;
 	}
 
 	public int getId() {

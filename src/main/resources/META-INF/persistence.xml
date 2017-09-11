@@ -5,7 +5,6 @@
     <persistence-unit name="assignment5spring">
     	<class>com.cgm.assignment5spring.domain.User</class>
     	<class>com.cgm.assignment5spring.domain.Message</class>
-    	<class>com.cgm.assignment5spring.domain.Friend</class>
     	<exclude-unlisted-classes>true</exclude-unlisted-classes>
     </persistence-unit>
 </persistence>

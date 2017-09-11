@@ -89,7 +89,7 @@
 
 		if (logged) {
 			var usernameString = "${sessionScope.usernameString}";
-			var userID = ${sessionScope.userID};
+			var userID = "${sessionScope.userID}";
 			loadMessages();
 		} else {
 			var usernameString = "";

@@ -1,6 +1,8 @@
 package com.cgm.assignment5spring.repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,5 +21,19 @@ public class UserDAO extends AbstractDAO<User>{
 		return (List<User>) em().createQuery(new StringBuilder().append("SELECT id FROM ").append((User.class).getCanonicalName()).append(" u WHERE u.user_name = '").append(user.getUser_name()).append("' AND u.user_password = '").append(user.getUser_password()).append("'").toString()).getResultList();
 	}
 	
-	
+	@Transactional
+	public Map<User, Boolean> getAllUsers(User user) {
+		Map<User, Boolean> users = new HashMap<User, Boolean>();
+		List<User> usersList = (List<User>) em().createQuery(new StringBuilder().append("SELECT user FROM ").append((User.class).getCanonicalName()).append(" user WHERE user.id != ").append(user.getId()).toString()).getResultList();
+		for(User userFromList : usersList) {
+			if(user.hasFriend(userFromList)) {
+				users.put(userFromList, true);
+			}
+			else {
+				users.put(userFromList, false);
+			}
+			System.out.println(userFromList.getUser_name());
+		}
+		return users;
+	}
 }

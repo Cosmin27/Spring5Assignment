@@ -12,33 +12,42 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cgm.assignment5spring.domain.Message;
 import com.cgm.assignment5spring.domain.User;
 import com.cgm.assignment5spring.dto.ServiceResponse;
-import com.cgm.assignment5spring.repository.FriendDAO;
+import com.cgm.assignment5spring.repository.UserDAO;
 
 @RestController
 public class FollowUserController {
 	@Autowired
-	FriendDAO friendDAO;
+	UserDAO userDAO;
 	
-	@RequestMapping(value="/followUserRest/{username}", method=RequestMethod.PUT)
-	public ServiceResponse follow(@PathVariable String username, HttpServletRequest request) {
+	@RequestMapping(value="/followUserRest/{id}", method=RequestMethod.PUT)
+	public ServiceResponse follow(@PathVariable Integer id, HttpServletRequest request) {
 		/*for(User user : ArtefactBuilder.userAccounts()) {
 			if(user.getUsername().equals(username)) {
 				user.addFriend((User) request.getSession().getAttribute("userAccount"));
 				return new ServiceResponse();
 			}
 		}*/
-		
+		User newFriend = userDAO.findById(id);
+		User currentUser = userDAO.findById((Integer) request.getSession().getAttribute("userID"));
+		currentUser.addFriend(newFriend);
+		userDAO.save(currentUser);
 		return new ServiceResponse("Error while following user. User not found.", 404);
 	}
 	
-	@RequestMapping(value="/unfollowUserRest/{username}", method=RequestMethod.PUT)
-	public ServiceResponse unfollow(@PathVariable String username, HttpServletRequest request) {
+	@RequestMapping(value="/unfollowUserRest/{id}", method=RequestMethod.PUT)
+	public ServiceResponse unfollow(@PathVariable Integer id, HttpServletRequest request) {
 		/*for(User user : ArtefactBuilder.userAccounts()) {
 			if(user.getUsername().equals(username)) {
 				user.removeFriend((User) request.getSession().getAttribute("userAccount"));
 				return new ServiceResponse();
 			}
 		}*/
+		User oldFriend = userDAO.findById(id);
+		User currentUser = userDAO.findById((Integer) request.getSession().getAttribute("userID"));
+		if(currentUser.getFriends().contains(oldFriend)) {
+			currentUser.removeFriend(oldFriend);
+		}
+		userDAO.save(currentUser);
 		return new ServiceResponse("Error while unfollowing user. User not found.", 404);
 	}
 }
