@@ -2,6 +2,7 @@ package com.cgm.assignment5spring.restcontrollers;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,9 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cgm.assignment5spring.domain.Message;
 import com.cgm.assignment5spring.domain.User;
 import com.cgm.assignment5spring.dto.ServiceResponse;
+import com.cgm.assignment5spring.repository.FriendDAO;
 
 @RestController
 public class FollowUserController {
+	@Autowired
+	FriendDAO friendDAO;
+	
 	@RequestMapping(value="/followUserRest/{username}", method=RequestMethod.PUT)
 	public ServiceResponse follow(@PathVariable String username, HttpServletRequest request) {
 		/*for(User user : ArtefactBuilder.userAccounts()) {
@@ -22,6 +27,7 @@ public class FollowUserController {
 				return new ServiceResponse();
 			}
 		}*/
+		
 		return new ServiceResponse("Error while following user. User not found.", 404);
 	}
 	

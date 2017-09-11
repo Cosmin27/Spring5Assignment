@@ -5,27 +5,28 @@ function loadMessages() {
 	if (logged) {
 
 		var urlString = "http://localhost:8080/assignment5spring/messages/";
-		urlString += usernameString;
-
+		urlString += userID;
+		$('#messages').append("<p><span class = \"bold_font\"> Loading messages... </span></p>");
 		$.ajax({
 					url : urlString,
-					dataType : 'json'
-				})
-				.then(
-						function(data) {
-
-							for (var index = 0; index < data.messages.length; index++) {
-								$('#messages')
-										.append(
-												"<p><span class=\"bold_font\">"
-														+ data.messages[index].messageAuthor.username
-														+ ":</span> "
-														+ data.messages[index].messageText
-														+ "</p>");
-							}
-						});
+					dataType : 'json',
+					success: function(data) {
+						console.log(data);
+						$('#messages').empty();
+						for (var index = 0; index < data.messages.length; index++) {
+							$('#messages')
+									.append(
+											"<p><span class=\"bold_font\">"
+													+ data.messages[index].messageAuthor.user_name
+													+ ":</span> "
+													+ data.messages[index].messageText
+													+ "</p>");
+						}
+					}
+				});
+				
 	}
-};
+}
 
 function sendMessage() {
 	$("#messageText").keypress(function(event) {
@@ -43,7 +44,7 @@ function sendMessage() {
 			data : JSON.stringify({"messageAuthor": null, "messageText": $("#messageText").val()}),
 			success : function(data) {
 				$("#messageText").val("");
-				$('#messages').append("<p><span class=\"bold_font\">" + data.messageAuthor.username + ":</span> " + data.messageText + "</p>");
+				$('#messages').append("<p><span class=\"bold_font\">" + data.messageAuthor.user_name + ":</span> " + data.messageText + "</p>");
 			},
 			error: function(e) {
 				console.log(e);

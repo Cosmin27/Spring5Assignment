@@ -1,6 +1,7 @@
 package com.cgm.assignment5spring.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MessageQueue {
 	private ArrayList<Message> messages;
@@ -19,5 +20,9 @@ public class MessageQueue {
 	
 	public void addMessage(Message message) {
 		this.messages.add(message);
+	}
+	
+	public void addMessages(List<Message> messages) {
+		this.messages.addAll(messages);
 	}
 }

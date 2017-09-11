@@ -1,5 +1,6 @@
 package com.cgm.assignment5spring.controllers;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -46,7 +47,16 @@ public class LoginController {
 				return new ModelAndView("login", model.asMap());
 			}
 			
-			System.out.println(userDAO.checkLogin(user));
+			List<User> loginResult = userDAO.loginAndGetID(user);
+			
+			if(loginResult.size() == 1) {
+				request.getSession().setAttribute("logged", true);
+				//request.getSession().setAttribute("userAccount", user);
+				request.getSession().setAttribute("usernameString", user.getUser_name());
+				request.getSession().setAttribute("userID", loginResult.get(0));
+
+				return new ModelAndView("redirect:/", model.asMap());
+			}
 
 			// System.out.println("USERNAME: " + user.getUsername() + " PASSWORD: " +
 			// user.getPassword());

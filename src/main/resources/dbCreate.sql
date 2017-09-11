@@ -15,7 +15,8 @@ CREATE TABLE sbs_friends(id_user INTEGER REFERENCES sbs_users(id) ON DELETE CASC
 
 CREATE TABLE sbs_messages(id SERIAL UNIQUE NOT NULL,
 				id_user INTEGER REFERENCES sbs_users(id) ON DELETE CASCADE,
-				messageText VARCHAR(200) NOT NULL
+				messageText VARCHAR(200) NOT NULL,
+				PRIMARY KEY(id)
 );
 
 INSERT INTO sbs_users(id, user_name, user_email, user_password) VALUES (nextval('sbs_users_id_seq'), 'username', 'username@a5.com', 'admin');

@@ -18,11 +18,8 @@ public class LogoutController {
 	public ModelAndView logout(Locale locale, Model model, HttpServletRequest request) {
 		if ((Boolean) request.getSession().getAttribute("logged")) {
 			request.getSession().setAttribute("logged", false);
-			User user = (User) request.getSession().getAttribute("userAccount");
-			/*if(user != null) {
-				user.setLogged(false);
-			}*/
-			request.getSession().removeAttribute("userAccount");
+			request.getSession().removeAttribute("userID");
+			request.getSession().removeAttribute("usernameString");
 			// System.out.println("LOGGED OUT");
 			return new ModelAndView("redirect:/", model.asMap());
 		}

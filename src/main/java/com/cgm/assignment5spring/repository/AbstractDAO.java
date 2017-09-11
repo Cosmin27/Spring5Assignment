@@ -32,6 +32,11 @@ public abstract class AbstractDAO<E> {
 	}
 	
 	@Transactional
+	public E findById(final Integer entityId) {
+		return entityManager.find(entityClass, entityId);
+	}
+	
+	@Transactional
 	public void save(final E entityToBeSaved) {
 		entityManager.persist(entityToBeSaved);
 	}

@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -39,6 +40,7 @@ public class User implements Serializable {
 	@Column(name = "user_password")
 	private String user_password = "";
 	
+	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinTable(name = "sbs_friends", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_friend"))
 	private List<User> friends = new ArrayList<User>();
@@ -76,6 +78,7 @@ public class User implements Serializable {
 		this.user_password = user_password;
 	}
 
+	@JsonIgnore
 	public List<User> getFriends() {
 		return friends;
 	}

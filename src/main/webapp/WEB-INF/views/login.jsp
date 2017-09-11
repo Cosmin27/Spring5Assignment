@@ -42,19 +42,18 @@
 					<sf:form action="/assignment5spring/login" method="POST"
 						modelAttribute="login">
 						<input type="hidden" name="_method" value="POST" />
-						<input type="hidden" name="usernameHidden" value="${user.username}" />
-						<input type="hidden" name="passwordHidden" value="${user.password}" />
+						
 						<div class="padding_container">
 							<table>
 								<tr>
-									<td><label for="username" class="artist_form_label">Username:
+									<td><label class="artist_form_label">Username:
 									</label></td>
 									<td><sf:input path="user_name" size="15" id="username"
 											class="vertical_middle" /> <sf:errors path="user_name"
 											cssClass="error" /></td>
 								</tr>
 								<tr>
-									<td><label for="password" class="artist_form_label">Password:
+									<td><label class="artist_form_label">Password:
 									</label></td>
 									<td><sf:input path="user_password" size="15" id="password"
 											type="password" class="vertical_middle" /> <sf:errors
@@ -93,6 +92,7 @@
 		var logged = ${sessionScope.logged};
 		if(logged == true){
 			var usernameString = "${sessionScope.usernameString}";
+			var userID = ${sessionScope.userID};
 		}
 		else {
 			var usernameString = "";
