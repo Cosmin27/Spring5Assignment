@@ -23,8 +23,8 @@ public class SearchUserController {
 	UserDAO userDAO;
 	
 	@RequestMapping(value="/search/{username}", method=RequestMethod.GET, produces = "application/json")
-	public ArrayList<User> searchForUsername(@PathVariable String username, HttpServletRequest request) {
-		ArrayList<User> users = new ArrayList<User>();
+	public Map<String, Boolean> searchForUsername(@PathVariable String username, HttpServletRequest request) {
+		Map<String, Boolean> users = userDAO.getAllUsersSearch(userDAO.findById((Integer) request.getSession().getAttribute("userID")), username);
 		/*for(User user : ArtefactBuilder.userAccounts()) {
 			if(user.getUsername().toLowerCase().contains(username.toLowerCase()) && !user.getUsername().equals(request.getSession().getAttribute("usernameString"))) {
 				users.add(user);
@@ -34,8 +34,8 @@ public class SearchUserController {
 	}
 	
 	@RequestMapping(value="/search", method=RequestMethod.GET, produces = "application/json")
-	public Map<User, Boolean> getUsers(HttpServletRequest request) {
-		Map<User, Boolean> users = userDAO.getAllUsers(userDAO.findById((Integer) request.getSession().getAttribute("userID")));;
+	public Map<String, Boolean> getUsers(HttpServletRequest request) {
+		Map<String, Boolean> users = userDAO.getAllUsers(userDAO.findById((Integer) request.getSession().getAttribute("userID")));
 		
 		//users.addAll(ArtefactBuilder.userAccounts());
 		//users.remove(request.getSession().getAttribute("userAccount"));

@@ -49,21 +49,14 @@ $(document).ready(function() {
 				url : urlString,
 				dataType : 'json'
 			}).then(function(data) {
-				for(var index = 0; index < data.length; index++) {
-					/*var hasFriend = false;
-					var friends = data[index].friendsAsStrings;
-					for(var friendIndex = 0; friendIndex < friends.length; friendIndex++) {
-						//console.log(friends[friendIndex].username + " " + data[index].username);
-						if(friends[friendIndex] == usernameString) {
-							hasFriend = true;
-						}
-					}*/
-					//if(hasFriend) {
-						$("#searchResults").append("<p><span class=\"bold_font\">" + data[index].username + "</span> <input name=\"addremoveuser\" type=\"button\" id=\"" + data[index].username + "\" value=\"Unfollow\" class=\"btn btn-unfollow-user\" /></p>");
-					//}
-					//else {
-						//$("#searchResults").append("<p><span class=\"bold_font\">" + data[index].username + "</span> <input name=\"addremoveuser\" type=\"button\" id=\"" + data[index].username + "\" value=\"Follow\" class=\"btn btn-follow-user\" /></p>");
-					//}
+				for(var element in data) {
+					console.log(element + "  " + data[element]);
+					if(data[element]) {
+						$("#searchResults").append("<p><span class=\"bold_font\">" + element + "</span> <input name=\"removeuser\" type=\"button\" id=\"" + element + "\" value=\"Unfollow\" class=\"btn btn-unfollow-user\" /></p>");
+					}
+					else {
+						$("#searchResults").append("<p><span class=\"bold_font\">" + element + "</span> <input name=\"adduser\" type=\"button\" id=\"" + element + "\" value=\"Follow\" class=\"btn btn-follow-user\" /></p>");
+					}
 				}
 			});
 			
@@ -85,20 +78,13 @@ $(document).ready(function() {
 						}
 						else {
 							$("#searchResults").append("<p>Search results:</p>");
-							for(var index = 0; index < data.length; index++) {
-								var hasFriend = false;
-								var friends = data[index].friendsAsStrings;
-								for(var friendIndex = 0; friendIndex < friends.length; friendIndex++) {
-									//console.log(friends[friendIndex].username + " " + data[index].username);
-									if(friends[friendIndex] == usernameString) {
-										hasFriend = true;
-									}
-								}
-								if(hasFriend) {
-									$("#searchResults").append("<p><span class=\"bold_font\">" + data[index].username + "</span> <input name=\"removeuser\" type=\"button\" id=\"" + data[index].username + "\" value=\"Unfollow\" class=\"btn btn-unfollow-user\" /></p>");
+							for(var element in data) {
+								console.log(element + "  " + data[element]);
+								if(data[element]) {
+									$("#searchResults").append("<p><span class=\"bold_font\">" + element + "</span> <input name=\"removeuser\" type=\"button\" id=\"" + element + "\" value=\"Unfollow\" class=\"btn btn-unfollow-user\" /></p>");
 								}
 								else {
-									$("#searchResults").append("<p><span class=\"bold_font\">" + data[index].username + "</span> <input name=\"adduser\" type=\"button\" id=\"" + data[index].username + "\" value=\"Follow\" class=\"btn btn-follow-user\" /></p>");
+									$("#searchResults").append("<p><span class=\"bold_font\">" + element + "</span> <input name=\"adduser\" type=\"button\" id=\"" + element + "\" value=\"Follow\" class=\"btn btn-follow-user\" /></p>");
 								}
 							}
 						}
@@ -117,14 +103,14 @@ function loadInitialList() {
 		dataType : 'json'
 	}).then(function(data) {
 		console.log(data);
-		for(var index = 0; index < data.length; index++) {
-			console.log(data[index][0]);
-			/*if(data[index]) {
-				$("#searchResults").append("<p><span class=\"bold_font\">" + data[index].username + "</span> <input name=\"removeuser\" type=\"button\" id=\"" + data[index].username + "\" value=\"Unfollow\" class=\"btn btn-unfollow-user\" /></p>");
+		for(var element in data) {
+			console.log(element + "  " + data[element]);
+			if(data[element]) {
+				$("#searchResults").append("<p><span class=\"bold_font\">" + element + "</span> <input name=\"removeuser\" type=\"button\" id=\"" + element + "\" value=\"Unfollow\" class=\"btn btn-unfollow-user\" /></p>");
 			}
 			else {
-				$("#searchResults").append("<p><span class=\"bold_font\">" + data[index].username + "</span> <input name=\"adduser\" type=\"button\" id=\"" + data[index].username + "\" value=\"Follow\" class=\"btn btn-follow-user\" /></p>");
-			}*/
+				$("#searchResults").append("<p><span class=\"bold_font\">" + element + "</span> <input name=\"adduser\" type=\"button\" id=\"" + element + "\" value=\"Follow\" class=\"btn btn-follow-user\" /></p>");
+			}
 		}
 	});
 }

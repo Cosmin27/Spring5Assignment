@@ -58,4 +58,21 @@ public class Message {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public boolean equals(Object object) {
+		if(object == null) {
+			return false;
+		}
+		
+		if(!(object instanceof Message)) {
+			return false;
+		}
+		
+		Message user = (Message) object;
+		if(this.id != user.getId()) {
+			return false;
+		}
+		
+		return true;
+	}
 }

@@ -32,11 +32,15 @@ public class MessageLoaderController {
 		User user = userDAO.findById(id);
 		//System.out.println(user.getUser_name() + "    " + user.getId());
 		//System.out.println("here " + messageDAO.em().createQuery("SELECT msg FROM " + (Message.class).getCanonicalName() + " msg WHERE msg.messageAuthor.id = :userId").setParameter("userId", user.getId()).getResultList());
-		List<Message> messages = messageDAO.em().createQuery("SELECT msg FROM " + (Message.class).getCanonicalName() + " msg WHERE msg.messageAuthor.id = :userId").setParameter("userId", user.getId()).getResultList();
+		List<Message> messages = user.getMessages();
 		
 		//System.out.println();
 
 		messageQueue.addMessages(messages);
+		
+		for(User friend : user.getFriends()) {
+			messageQueue.addMessages(friend.getMessages());
+		}
 		//System.out.println("Messages: " + messageQueue.getMessages().size());
 
 		/*

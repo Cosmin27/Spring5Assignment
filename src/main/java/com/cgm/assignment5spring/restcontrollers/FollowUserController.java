@@ -19,35 +19,38 @@ public class FollowUserController {
 	@Autowired
 	UserDAO userDAO;
 	
-	@RequestMapping(value="/followUserRest/{id}", method=RequestMethod.PUT)
-	public ServiceResponse follow(@PathVariable Integer id, HttpServletRequest request) {
+	@RequestMapping(value="/followUserRest/{username}", method=RequestMethod.PUT)
+	public ServiceResponse follow(@PathVariable String username, HttpServletRequest request) {
 		/*for(User user : ArtefactBuilder.userAccounts()) {
 			if(user.getUsername().equals(username)) {
 				user.addFriend((User) request.getSession().getAttribute("userAccount"));
 				return new ServiceResponse();
 			}
 		}*/
-		User newFriend = userDAO.findById(id);
+		System.out.println("HERE!!!");
+		User newFriend = userDAO.getUserWithUsername(username).get(0);
+		
 		User currentUser = userDAO.findById((Integer) request.getSession().getAttribute("userID"));
+		System.out.println(currentUser.getUser_name());
 		currentUser.addFriend(newFriend);
-		userDAO.save(currentUser);
-		return new ServiceResponse("Error while following user. User not found.", 404);
+		userDAO.update(currentUser);
+		return new ServiceResponse();
 	}
 	
-	@RequestMapping(value="/unfollowUserRest/{id}", method=RequestMethod.PUT)
-	public ServiceResponse unfollow(@PathVariable Integer id, HttpServletRequest request) {
+	@RequestMapping(value="/unfollowUserRest/{username}", method=RequestMethod.PUT)
+	public ServiceResponse unfollow(@PathVariable String username, HttpServletRequest request) {
 		/*for(User user : ArtefactBuilder.userAccounts()) {
 			if(user.getUsername().equals(username)) {
 				user.removeFriend((User) request.getSession().getAttribute("userAccount"));
 				return new ServiceResponse();
 			}
 		}*/
-		User oldFriend = userDAO.findById(id);
+		User oldFriend = userDAO.getUserWithUsername(username).get(0);
 		User currentUser = userDAO.findById((Integer) request.getSession().getAttribute("userID"));
 		if(currentUser.getFriends().contains(oldFriend)) {
 			currentUser.removeFriend(oldFriend);
 		}
-		userDAO.save(currentUser);
-		return new ServiceResponse("Error while unfollowing user. User not found.", 404);
+		userDAO.update(currentUser);
+		return new ServiceResponse();
 	}
 }
