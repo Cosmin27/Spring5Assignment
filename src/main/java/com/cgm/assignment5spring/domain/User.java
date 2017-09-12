@@ -43,11 +43,11 @@ public class User implements Serializable {
 	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	@JoinTable(name = "sbs_friends", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_friend"))
-	private List<User> friends;
+	private List<User> friends = new ArrayList<User>();
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "messageAuthor", fetch = FetchType.EAGER)
-	private List<Message> messages;
+	private List<Message> messages = new ArrayList<Message>();
 	
 	public User() {
 		
@@ -123,6 +123,7 @@ public class User implements Serializable {
 		this.id = id;
 	}
 	
+	@Override
 	public boolean equals(Object object) {
 		if(object == null) {
 			return false;
@@ -132,11 +133,20 @@ public class User implements Serializable {
 			return false;
 		}
 		
-		User user = (User) object;
-		if(this.id != user.getId()) {
-			return false;
+		if(object == this) {
+			return true;
 		}
 		
-		return true;
+		User user = (User) object;
+		if(this.id == user.getId()) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		return (int) id;
 	}
 }

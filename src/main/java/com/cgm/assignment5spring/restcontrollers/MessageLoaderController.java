@@ -16,31 +16,20 @@ import com.cgm.assignment5spring.domain.MessageQueue;
 import com.cgm.assignment5spring.domain.User;
 import com.cgm.assignment5spring.repository.MessageDAO;
 import com.cgm.assignment5spring.repository.UserDAO;
+import com.cgm.assignment5spring.services.MessageLoaderService;
 
 @RestController
 public class MessageLoaderController {
 	@Autowired
-	UserDAO userDAO;
-	@Autowired
-	MessageDAO messageDAO;
+	MessageLoaderService messageLoaderService;
+	
 
 	@RequestMapping(value = "/messages/{id}", method = RequestMethod.GET, produces = "application/json")
 	public MessageQueue getMessages(@PathVariable Integer id) {
 		// System.out.println("HERE!!!");
-		MessageQueue messageQueue = new MessageQueue();
-
-		User user = userDAO.findById(id);
-		//System.out.println(user.getUser_name() + "    " + user.getId());
-		//System.out.println("here " + messageDAO.em().createQuery("SELECT msg FROM " + (Message.class).getCanonicalName() + " msg WHERE msg.messageAuthor.id = :userId").setParameter("userId", user.getId()).getResultList());
-		List<Message> messages = user.getMessages();
 		
-		//System.out.println();
 
-		messageQueue.addMessages(messages);
 		
-		for(User friend : user.getFriends()) {
-			messageQueue.addMessages(friend.getMessages());
-		}
 		//System.out.println("Messages: " + messageQueue.getMessages().size());
 
 		/*
@@ -51,6 +40,6 @@ public class MessageLoaderController {
 		 * getUsername())) { messageQueue.addMessage(message); } }
 		 */
 
-		return messageQueue;
+		return messageLoaderService.getMessages(id);
 	}
 }

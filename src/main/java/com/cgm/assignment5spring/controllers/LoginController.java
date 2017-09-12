@@ -18,15 +18,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cgm.assignment5spring.domain.User;
 import com.cgm.assignment5spring.repository.UserDAO;
-import com.cgm.assignment5spring.db.repository.contract.UserDataStore;
 
 @Controller
 public class LoginController {
 	@Autowired
 	UserDAO userDAO;
-	
-	@Autowired
-	UserDataStore userDataStore;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login(Locale locale, Model model, HttpServletRequest request) {

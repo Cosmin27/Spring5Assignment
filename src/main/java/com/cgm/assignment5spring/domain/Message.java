@@ -75,4 +75,8 @@ public class Message {
 		
 		return true;
 	}
+	
+	public int hashCode() {
+		return (int) id;
+	}
 }

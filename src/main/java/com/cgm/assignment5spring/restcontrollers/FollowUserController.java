@@ -27,11 +27,11 @@ public class FollowUserController {
 				return new ServiceResponse();
 			}
 		}*/
-		System.out.println("HERE!!!");
-		User newFriend = userDAO.getUserWithUsername(username).get(0);
+		//System.out.println("HERE!!!");
+		User newFriend = userDAO.getUserWithUsername(username);
 		
 		User currentUser = userDAO.findById((Integer) request.getSession().getAttribute("userID"));
-		System.out.println(currentUser.getUser_name());
+		//System.out.println(currentUser.getUser_name());
 		currentUser.addFriend(newFriend);
 		userDAO.update(currentUser);
 		return new ServiceResponse();
@@ -45,12 +45,20 @@ public class FollowUserController {
 				return new ServiceResponse();
 			}
 		}*/
-		User oldFriend = userDAO.getUserWithUsername(username).get(0);
+		//System.out.println("HERE: " + username);
+		User oldFriend = userDAO.getUserWithUsername(username);
+		//System.out.println(oldFriend);
 		User currentUser = userDAO.findById((Integer) request.getSession().getAttribute("userID"));
-		if(currentUser.getFriends().contains(oldFriend)) {
-			currentUser.removeFriend(oldFriend);
-		}
+		//System.out.println(currentUser.getUser_name());
+		currentUser.getFriends().remove(oldFriend);
 		userDAO.update(currentUser);
+		/*if(currentUser.getFriends().contains(oldFriend)) {
+			currentUser.getFriends().remove(currentUser.getFriends().indexOf(oldFriend));
+			userDAO.update(currentUser);
+			System.out.println("HERE");
+		}*/
+		//System.out.println("TEST: " + currentUser.getFriends().contains(oldFriend));
+		
 		return new ServiceResponse();
 	}
 }
