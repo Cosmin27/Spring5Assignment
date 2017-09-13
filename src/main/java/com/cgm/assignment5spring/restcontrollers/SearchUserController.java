@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cgm.assignment5spring.domain.MessageQueue;
 import com.cgm.assignment5spring.domain.User;
+import com.cgm.assignment5spring.dto.MessageQueue;
 import com.cgm.assignment5spring.repository.UserDAO;
 
 @RestController

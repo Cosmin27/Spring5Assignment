@@ -33,7 +33,7 @@ public class User implements Serializable {
 	@Column(name = "user_email")
 	private String user_email = "";
 	
-	@Column(name = "user_name")
+	@Column(name = "user_name", unique = true)
 	private String user_name = "";
 	
 	@JsonIgnore
@@ -41,13 +41,18 @@ public class User implements Serializable {
 	private String user_password = "";
 	
 	@JsonIgnore
-	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "sbs_friends", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_friend"))
-	private List<User> friends = new ArrayList<User>();
+	private List<User> friends;
+	
+	@JsonIgnore
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "sbs_friends", joinColumns = @JoinColumn(name = "id_friend"), inverseJoinColumns = @JoinColumn(name = "id_user"))
+	private List<User> friendOf;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "messageAuthor", fetch = FetchType.EAGER)
-	private List<Message> messages = new ArrayList<Message>();
+	private List<Message> messages;
 	
 	public User() {
 		

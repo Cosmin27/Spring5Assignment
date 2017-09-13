@@ -50,7 +50,7 @@ public class FollowUserController {
 		//System.out.println(oldFriend);
 		User currentUser = userDAO.findById((Integer) request.getSession().getAttribute("userID"));
 		//System.out.println(currentUser.getUser_name());
-		currentUser.getFriends().remove(oldFriend);
+		currentUser.removeFriend(oldFriend);
 		userDAO.update(currentUser);
 		/*if(currentUser.getFriends().contains(oldFriend)) {
 			currentUser.getFriends().remove(currentUser.getFriends().indexOf(oldFriend));

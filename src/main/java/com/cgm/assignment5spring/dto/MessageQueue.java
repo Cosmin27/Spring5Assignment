@@ -1,7 +1,9 @@
-package com.cgm.assignment5spring.domain;
+package com.cgm.assignment5spring.dto;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.cgm.assignment5spring.domain.Message;
 
 public class MessageQueue {
 	private ArrayList<Message> messages;

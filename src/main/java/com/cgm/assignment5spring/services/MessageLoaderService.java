@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cgm.assignment5spring.domain.Message;
-import com.cgm.assignment5spring.domain.MessageQueue;
 import com.cgm.assignment5spring.domain.User;
+import com.cgm.assignment5spring.dto.MessageQueue;
 import com.cgm.assignment5spring.repository.MessageDAO;
 import com.cgm.assignment5spring.repository.UserDAO;
 
@@ -31,6 +31,7 @@ public class MessageLoaderService {
 
 		messageQueue.addMessages(messages);
 		System.out.println("FRIENDS: " + user.getFriends().size());
+		System.out.println(user.getFriends());
 		for(User friend : user.getFriends()) {
 			System.out.println(friend.getMessages());
 			messageQueue.addMessages(friend.getMessages());
