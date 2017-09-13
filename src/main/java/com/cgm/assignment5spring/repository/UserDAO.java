@@ -4,6 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,20 +18,6 @@ import com.cgm.assignment5spring.domain.User;
 public class UserDAO extends AbstractDAO<User>{
 	protected UserDAO() {
 		super(User.class);
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public List<User> loginAndGetID(User user) {
-		//System.out.println((List<User>) em().createQuery(new StringBuilder().append("SELECT user_name FROM ").append((User.class).getCanonicalName()).append(" u WHERE u.user_name = '").append(user.getUser_name()).append("' AND u.user_password = '").append(user.getUser_password()).append("'").toString()).getResultList());
-		return (List<User>) em().createQuery(new StringBuilder().append("SELECT id FROM ")
-				.append((User.class).getCanonicalName())
-				.append(" u WHERE u.user_name = '")
-				.append(user.getUser_name())
-				.append("' AND u.user_password = '")
-				.append(user.getUser_password())
-				.append("'")
-				.toString()).getResultList();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -79,11 +70,22 @@ public class UserDAO extends AbstractDAO<User>{
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public User getUserWithUsername(String username) {
-		return (User) em().createQuery(new StringBuilder().append("SELECT u FROM ")
+		CriteriaBuilder criteriaBuilder = em().getCriteriaBuilder();
+		CriteriaQuery criteriaQuery = criteriaBuilder.createQuery();
+		Root<User> userToSelect = criteriaQuery.from(User.class);
+		criteriaQuery.select(userToSelect);
+		
+		
+		criteriaQuery.where(criteriaBuilder.equal(userToSelect.get("user_name"), username));
+		Query query = em().createQuery(criteriaQuery);
+		User result = (User) query.getSingleResult();
+
+		return result;
+		/*return (User) em().createQuery(new StringBuilder().append("SELECT u FROM ")
 				.append((User.class).getCanonicalName())
 				.append(" u WHERE u.user_name = '")
 				.append(username)
 				.append("'")
-				.toString()).getSingleResult();
+				.toString()).getSingleResult();*/
 	}
 }

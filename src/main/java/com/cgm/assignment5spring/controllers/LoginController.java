@@ -18,11 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.cgm.assignment5spring.domain.User;
 import com.cgm.assignment5spring.repository.UserDAO;
+import com.cgm.assignment5spring.services.LoginService;
 
 @Controller
 public class LoginController {
 	@Autowired
-	UserDAO userDAO;
+	LoginService loginService;
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login(Locale locale, Model model, HttpServletRequest request) {
@@ -43,30 +44,14 @@ public class LoginController {
 				return new ModelAndView("login", model.asMap());
 			}
 			
-			List<User> loginResult = userDAO.loginAndGetID(user);
-			
-			if(loginResult.size() == 1) {
+			if(loginService.checkLogin(user)) {
 				request.getSession().setAttribute("logged", true);
 				//request.getSession().setAttribute("userAccount", user);
 				request.getSession().setAttribute("usernameString", user.getUser_name());
-				request.getSession().setAttribute("userID", loginResult.get(0));
+				request.getSession().setAttribute("userID", loginService.getUserIDForUsername(user.getUser_name()));
 
 				return new ModelAndView("redirect:/", model.asMap());
 			}
-
-			// System.out.println("USERNAME: " + user.getUsername() + " PASSWORD: " +
-			// user.getPassword());
-			/*for (User userAccount : ArtefactBuilder.userAccounts()) {
-				if (userAccount.getUsername().equals(user.getUsername())
-						&& userAccount.getPassword().equals(user.getPassword())) {
-					request.getSession().setAttribute("logged", true);
-					userAccount.setLogged(true);
-					request.getSession().setAttribute("userAccount", userAccount);
-					request.getSession().setAttribute("usernameString", userAccount.getUsername());
-
-					return new ModelAndView("redirect:/", model.asMap());
-				}
-			}*/
 			
 			model.addAttribute("error", "Wrong username/password.");
 			return new ModelAndView("login", model.asMap());
