@@ -16,30 +16,16 @@ import com.cgm.assignment5spring.domain.User;
 import com.cgm.assignment5spring.dto.MessageQueue;
 import com.cgm.assignment5spring.repository.MessageDAO;
 import com.cgm.assignment5spring.repository.UserDAO;
-import com.cgm.assignment5spring.services.MessageLoaderService;
+import com.cgm.assignment5spring.services.MessageService;
 
 @RestController
 public class MessageLoaderController {
 	@Autowired
-	MessageLoaderService messageLoaderService;
+	MessageService messageLoaderService;
 	
 
 	@RequestMapping(value = "/messages/{id}", method = RequestMethod.GET, produces = "application/json")
 	public MessageQueue getMessages(@PathVariable Integer id) {
-		// System.out.println("HERE!!!");
-		
-
-		
-		//System.out.println("Messages: " + messageQueue.getMessages().size());
-
-		/*
-		 * User currentUser = ArtefactBuilder.getUsers().getUserWithUsername(username);
-		 * for(Message message : ArtefactBuilder.getMessageQueue().getMessages()) {
-		 * if(message.getMessageAuthor().getUsername().equals(username) ||
-		 * currentUser.getFriendsAsStrings().contains(message.getMessageAuthor().
-		 * getUsername())) { messageQueue.addMessage(message); } }
-		 */
-
 		return messageLoaderService.getMessages(id);
 	}
 }

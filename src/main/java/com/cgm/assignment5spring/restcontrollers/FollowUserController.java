@@ -13,52 +13,29 @@ import com.cgm.assignment5spring.domain.Message;
 import com.cgm.assignment5spring.domain.User;
 import com.cgm.assignment5spring.dto.ServiceResponse;
 import com.cgm.assignment5spring.repository.UserDAO;
+import com.cgm.assignment5spring.services.FollowUserService;
 
 @RestController
 public class FollowUserController {
 	@Autowired
-	UserDAO userDAO;
-	
-	@RequestMapping(value="/followUserRest/{username}", method=RequestMethod.PUT)
+	FollowUserService followUserService;
+
+	@RequestMapping(value = "/followUserRest/{username}", method = RequestMethod.PUT)
 	public ServiceResponse follow(@PathVariable String username, HttpServletRequest request) {
-		/*for(User user : ArtefactBuilder.userAccounts()) {
-			if(user.getUsername().equals(username)) {
-				user.addFriend((User) request.getSession().getAttribute("userAccount"));
-				return new ServiceResponse();
-			}
-		}*/
-		//System.out.println("HERE!!!");
-		User newFriend = userDAO.getUserWithUsername(username);
+		if (followUserService.followUser((Integer) request.getSession().getAttribute("userID"), username)) {
+			return new ServiceResponse();
+		}
 		
-		User currentUser = userDAO.findById((Integer) request.getSession().getAttribute("userID"));
-		//System.out.println(currentUser.getUser_name());
-		currentUser.addFriend(newFriend);
-		userDAO.update(currentUser);
-		return new ServiceResponse();
+		return new ServiceResponse("Error while following user. User not found.", 404);
+
 	}
-	
-	@RequestMapping(value="/unfollowUserRest/{username}", method=RequestMethod.PUT)
+
+	@RequestMapping(value = "/unfollowUserRest/{username}", method = RequestMethod.PUT)
 	public ServiceResponse unfollow(@PathVariable String username, HttpServletRequest request) {
-		/*for(User user : ArtefactBuilder.userAccounts()) {
-			if(user.getUsername().equals(username)) {
-				user.removeFriend((User) request.getSession().getAttribute("userAccount"));
-				return new ServiceResponse();
-			}
-		}*/
-		//System.out.println("HERE: " + username);
-		User oldFriend = userDAO.getUserWithUsername(username);
-		//System.out.println(oldFriend);
-		User currentUser = userDAO.findById((Integer) request.getSession().getAttribute("userID"));
-		//System.out.println(currentUser.getUser_name());
-		currentUser.removeFriend(oldFriend);
-		userDAO.update(currentUser);
-		/*if(currentUser.getFriends().contains(oldFriend)) {
-			currentUser.getFriends().remove(currentUser.getFriends().indexOf(oldFriend));
-			userDAO.update(currentUser);
-			System.out.println("HERE");
-		}*/
-		//System.out.println("TEST: " + currentUser.getFriends().contains(oldFriend));
-		
-		return new ServiceResponse();
+		if (followUserService.unfollowUser((Integer) request.getSession().getAttribute("userID"), username)) {
+			return new ServiceResponse();
+		}
+
+		return new ServiceResponse("Error while unfollowing user. User not found.", 404);
 	}
 }

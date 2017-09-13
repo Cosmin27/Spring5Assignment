@@ -12,22 +12,15 @@ import com.cgm.assignment5spring.domain.Message;
 import com.cgm.assignment5spring.domain.User;
 import com.cgm.assignment5spring.repository.MessageDAO;
 import com.cgm.assignment5spring.repository.UserDAO;
+import com.cgm.assignment5spring.services.MessageService;
 
 @RestController
 public class MessagePostController {
 	@Autowired
-	UserDAO userDAO;
-	
-	@Autowired
-	MessageDAO messageDAO;
+	MessageService messageService;
 	
 	@RequestMapping(value="/postMessage", method=RequestMethod.POST, consumes="application/json", produces="application/json")
 	public Message postMessage(@RequestBody Message message, HttpServletRequest request) {
-		//System.out.println("TEST "+message.getMessageText());
-		User user = userDAO.findById((Integer) request.getSession().getAttribute("userID"));
-		message.setMessageAuthor(user);
-		//ArtefactBuilder.getMessageQueue().addMessage(message);
-		messageDAO.save(message);
-		return message;
+		return messageService.postMessage(message, (Integer) request.getSession().getAttribute("userID"));
 	}
 }
