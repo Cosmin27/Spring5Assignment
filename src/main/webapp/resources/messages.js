@@ -1,9 +1,6 @@
 function loadMessages() {
 	sendMessage();
-	console.log("testing here");
-	console.log(logged);
 	if (logged) {
-
 		var urlString = "http://localhost:8080/assignment5spring/messages/";
 		urlString += userID;
 		$('#messages').append("<p><span class = \"bold_font\"> Loading messages... </span></p>");
@@ -11,7 +8,6 @@ function loadMessages() {
 					url : urlString,
 					dataType : 'json',
 					success: function(data) {
-						console.log(data);
 						$('#messages').empty();
 						for (var index = 0; index < data.messages.length; index++) {
 							$('#messages')
@@ -22,6 +18,9 @@ function loadMessages() {
 													+ data.messages[index].messageText
 													+ "</p>");
 						}
+					},
+					error: function(e) {
+						console.log(e);
 					}
 				});
 				
